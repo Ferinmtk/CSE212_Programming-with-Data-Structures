@@ -11,11 +11,14 @@ public class Node
 
     public void Insert(int value)
     {
-        // TODO Start Problem 1
+        // Problem 1: Only allow unique values
+        // If value already exists, do nothing
+        if (value == Data)
+            return;
 
         if (value < Data)
         {
-            // Insert to the left
+            // Insert into left subtree
             if (Left is null)
                 Left = new Node(value);
             else
@@ -23,7 +26,7 @@ public class Node
         }
         else
         {
-            // Insert to the right
+            // Insert into right subtree
             if (Right is null)
                 Right = new Node(value);
             else
@@ -33,13 +36,29 @@ public class Node
 
     public bool Contains(int value)
     {
-        // TODO Start Problem 2
-        return false;
+        // Problem 2: Recursively search the tree
+
+        // Found value
+        if (value == Data)
+            return true;
+
+        // Search left subtree
+        if (value < Data)
+        {
+            return Left is not null && Left.Contains(value);
+        }
+
+        // Search right subtree
+        return Right is not null && Right.Contains(value);
     }
 
     public int GetHeight()
     {
-        // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        // Problem 4: Height = 1 + max(left height, right height)
+
+        int leftHeight = Left is null ? 0 : Left.GetHeight();
+        int rightHeight = Right is null ? 0 : Right.GetHeight();
+
+        return 1 + Math.Max(leftHeight, rightHeight);
     }
 }
